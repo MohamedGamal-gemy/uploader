@@ -47,7 +47,7 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo="https://uploader-livid.vercel.app/"
+          redirectTo="https://uploader-livid.vercel.app/#"
         />
       </div>
     );
