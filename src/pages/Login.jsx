@@ -11,6 +11,7 @@ const Login = () => {
   const { userEmail, fetchEmails } = useAdmin();
 
   const us = userEmail.find((e) => e.email.includes(session?.user?.email));
+  console.log(userEmail);
 
   useEffect(() => {
     fetchEmails();
@@ -46,6 +47,7 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
+          redirectTo="https://uploader-livid.vercel.app/"
         />
       </div>
     );
