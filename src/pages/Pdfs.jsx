@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import { File } from "lucide-react";
-import ButtonDelete from "../components/Button/ButtonDelete";
+import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
 
 const Pdfs = () => {

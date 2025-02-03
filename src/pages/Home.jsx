@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import supabase from "../supabase/db";
-import AnimatedShapes from "../components/AnimatedShapes";
+// import AnimatedShapes from "../components/AnimatedShapes";
 
 const AuthForm = () => {
   const [files, setFiles] = useState([]); // تعديل لتخزين عدة ملفات

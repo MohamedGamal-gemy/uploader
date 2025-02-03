@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
-import ButtonDelete from "../components/Button/ButtonDelete";
+import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
 
 const Sounds = () => {

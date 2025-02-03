@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useUpload from "../hooks/useUpload";
-import ButtonDelete from "../components/Button/ButtonDelete";
+import ButtonDelete from "../components/Head/Button/ButtonDelete";
 
 const Images = () => {
   const { getFiles, images, cdn, deleteFile } = useUpload();

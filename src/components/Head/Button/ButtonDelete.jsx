@@ -8,7 +8,6 @@ const ButtonDelete = ({ deleteFile, file, className }) => {
     await deleteFile(file.name);
     setLoading(false);
   };
-  // top-2 right-2
   return (
     <button
       onClick={handleDelete}

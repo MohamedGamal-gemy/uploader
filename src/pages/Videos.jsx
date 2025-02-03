@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import { Play } from "lucide-react"; // استيراد الأيقونة
 import Head from "../components/Head/Head";
-import ButtonDelete from "../components/Button/ButtonDelete";
+import ButtonDelete from "../components/Head/Button/ButtonDelete";
 
 const Videos = () => {
   const { getFiles, videos, cdn, deleteFile } = useUpload();
@@ -13,7 +13,6 @@ const Videos = () => {
     getFiles().finally(() => setLoading(false));
   }, []);
 
-  // دالة لتحديث حالة تشغيل الفيديو
   const handlePlay = () => {
     setIsPlaying(true);
   };
