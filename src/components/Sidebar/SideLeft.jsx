@@ -7,12 +7,12 @@ import {
   PersonStanding,
   Video,
 } from "lucide-react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SideLeft = () => {
   const category = [
     {
-      path: "/home",
+      path: "/",
       id: "home",
       label: "Home",
       icon: <HomeIcon className="w-5 h-5" />,
