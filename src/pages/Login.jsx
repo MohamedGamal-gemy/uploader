@@ -5,10 +5,12 @@ import useLogin from "../hooks/useLogin";
 import useAdmin from "../hooks/useAdmin";
 import { useEffect } from "react";
 import AppRoute from "./AppRoute";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { session, handleLogout, loading } = useLogin();
   const { userEmail, fetchEmails } = useAdmin();
+  const navigate = useNavigate();
 
   const us = userEmail.find((e) => e.email.includes(session?.user?.email));
   console.log(userEmail);
@@ -17,13 +19,17 @@ const Login = () => {
     fetchEmails();
   }, []);
 
+  useEffect(() => {
+    // إذا كان هناك جلسة، قم بتوجيه المستخدم إلى الصفحة الرئيسية
+    if (session?.user?.email) {
+      navigate("/home"); // التوجيه بعد تسجيل الدخول بنجاح
+    }
+  }, [session]);
+
   if (us?.email) {
     return (
       <div>
-        <div
-          className="bg-[#969da1] text-white flex h-14 justify-evenly items-center
-         px-20"
-        >
+        <div className="bg-[#969da1] text-white flex h-14 justify-evenly items-center px-20">
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
             {us?.email === "mohamedelnagg@gmail.com" ? " (Admin)" : " (user)"}
@@ -31,8 +37,7 @@ const Login = () => {
           <button
             onClick={handleLogout}
             disabled={loading}
-            className="cursor-pointer bg-amber-400 p-2 rounded-full
-             hover:bg-amber-500 transition"
+            className="cursor-pointer bg-amber-400 p-2 rounded-full hover:bg-amber-500 transition"
           >
             {loading ? "Logging out..." : "Log out"}
           </button>
@@ -47,7 +52,7 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo="https://uploader-livid.vercel.app/home"
+          redirectTo="https://uploader-livid.vercel.app/home" // استخدم رابط ثابت هنا
         />
       </div>
     );
