@@ -1,62 +1,64 @@
-import { FileIcon, X } from "lucide-react";
+import { useState } from "react";
+import useAdmin from "../../hooks/useAdmin";
+import { useNavigate } from "react-router-dom";
 
-interface FileItem {
-  file: {
-    name: string;
-    id: string;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    metadata: Record<string, any>;
-    created_at: string;
+const Modal = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { addEmail } = useAdmin();
+  const navigate = useNavigate();
+  //   if (!isOpen) return null;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    if (inputValue) {
+      await addEmail(inputValue);
+    }
+    setLoading(false);
+    navigate("/admin");
+    // onClose();
   };
-  publicUrl: string;
-}
-
-interface ModalProps {
-  file: FileItem;
-  onClose: () => void;
-}
-
-function Modal({ file, onClose }: ModalProps) {
-  console.log(file);
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-      <div className="relative w-[90vw] h-[90vh] bg-white rounded-lg">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-red-100 text-red-500 hover:bg-red-200 transition-colors z-10"
-        >
-          <X className="w-6 h-6" />
-        </button>
-
-        {file.file.metadata?.mimetype.startsWith("image/") ? (
-          <img
-            src={file.publicUrl}
-            alt={file.file.name}
-            className="w-full h-full object-contain rounded-lg"
-          />
-        ) : file.file.metadata?.mimetype === "application/pdf" ? (
-          <iframe
-            src={`https://docs.google.com/gview?url=${encodeURIComponent(
-              file.publicUrl
-            )}&embedded=true`}
-            className="w-full h-full rounded-lg"
-            title="PDF Viewer"
-          />
-        ) : file.file.metadata?.mimetype.startsWith("video/") ? (
-          <video
-            src={file.publicUrl}
-            controls
-            className="w-full h-full object-contain rounded-lg"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <FileIcon className="w-24 h-24 text-gray-400" />
-          </div>
-        )}
-      </div>
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-lg shadow-lg p-6 w-[400px]"
+      >
+        <h2 className="text-2xl font-semibold mb-4 text-center">Add Email</h2>
+        <input
+          required
+          type="email"
+          className="w-full p-2 border border-gray-300 rounded-md mb-4"
+          placeholder="Enter email"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <div className="flex justify-between">
+          <button
+            className="bg-gray-300 hover:bg-red-500 hover:text-white cursor-pointer transition text-gray-800 py-2 px-4 rounded-md"
+            onClick={() => navigate("/admin")}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className={`bg-blue-500 cursor-pointer hover:bg-blue-600 transition text-white py-2 px-4 rounded-md ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={loading}
+          >
+            {loading ? (
+              <div className="animate-spin border-t-2 border-white w-5 h-5 rounded-full mx-auto"></div> // دائرة تحميل
+            ) : (
+              "Add"
+            )}
+          </button>
+        </div>
+      </form>
     </div>
   );
-}
+};
 
 export default Modal;

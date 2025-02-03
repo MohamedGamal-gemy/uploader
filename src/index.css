@@ -2,6 +2,20 @@
 @theme {
   --color-primary: #303841;
   --color-secondary: #262e35;
-  --color-third: #7269EF;
-  --color-fourth: #F9FAFB;
+  /* --color-third: #c26cee; */
+  --color-third: #6cebee;
+  --color-fourth: #f9fafb;
+  --color-test: #80ffd5;
+}
+
+a.active {
+  /* color: red !important; */
+  background-color: #46dde68f;
+  color: #ffffff;
+}
+.cercle {
+  box-shadow: 0 0 10px 2px rgb(56, 187, 231);
+}
+.cercle2 {
+  box-shadow: 0 0 10px 2px rgb(200, 191, 33);
 }
