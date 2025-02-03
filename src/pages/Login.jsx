@@ -19,13 +19,12 @@ const Login = () => {
     fetchEmails();
   }, []);
 
-  useEffect(() => {
-    // إذا كان هناك جلسة، قم بتوجيه المستخدم إلى الصفحة الرئيسية
-    if (session?.user?.email) {
-      navigate("/home"); // التوجيه بعد تسجيل الدخول بنجاح
-    }
-  }, [session]);
-
+  // useEffect(() => {
+  //   // إذا كان هناك جلسة، قم بتوجيه المستخدم إلى الصفحة الرئيسية
+  //   if (session?.user?.email && !window.location.href.includes("/home")) {
+  //     navigate("/home"); // التوجيه بعد تسجيل الدخول بنجاح
+  //   }
+  // }, [session, navigate]);
   if (us?.email) {
     return (
       <div>
@@ -52,7 +51,7 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
-          redirectTo="https://uploader-livid.vercel.app/home" // استخدم رابط ثابت هنا
+          // redirectTo="https://uploader-livid.vercel.app/home" // استخدم رابط ثابت هنا
         />
       </div>
     );
