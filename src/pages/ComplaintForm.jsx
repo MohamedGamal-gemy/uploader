@@ -28,7 +28,7 @@ const ComplaintForm = () => {
         "JuUzNyqdu7eQn3hpN"
       );
 
-      console.log("Email sent successfully:", response);
+      // console.log("Email sent successfully:", response);
       toast.success("تم تقديم الشكوى بنجاح", {
         autoClose: 3000,
         hideProgressBar: true,

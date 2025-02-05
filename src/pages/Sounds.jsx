@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
+import useLogin from "../hooks/useLogin";
+import { MessageCircle } from "lucide-react";
+import CommentModal from "../utils/CommentModal";
 
 const Sounds = () => {
+  const { session } = useLogin();
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [audioName, setAudioName] = useState(null);
+  const [audioId, setAudioId] = useState(null);
+
   const { getFiles, audios, cdn, deleteFile } = useUpload();
 
   useEffect(() => {
@@ -23,7 +31,7 @@ const Sounds = () => {
             audios.map((audio, index) => (
               <div
                 key={index}
-                className=" w-80 px-6 pt-4 pb-6  bg-white rounded-lg shadow-md mt-6 relative"
+                className="w-80 px-6 pt-4 pb-6 bg-white rounded-lg shadow-md mt-6 relative"
               >
                 <div className="mb-4">
                   <audio controls className="w-full">
@@ -31,10 +39,28 @@ const Sounds = () => {
                     المتصفح الخاص بك لا يدعم الصوت.
                   </audio>
                 </div>
-                <ButtonDelete
-                  deleteFile={deleteFile}
-                  file={audio}
-                  className={"bottom-0.5 px-2 "}
+                {session?.user.email === "mohamedelnagg@gmail.com" && (
+                  <ButtonDelete
+                    deleteFile={deleteFile}
+                    file={audio}
+                    className={"bottom-0.5 px-2 "}
+                  />
+                )}
+                {openModal && (
+                  <CommentModal
+                    file={cdn + audio.name}
+                    typeFile={"sound"}
+                    idFile={audio.id}
+                    openModal={setOpenModal}
+                  />
+                )}
+                <MessageCircle
+                  className="w-5 h-5 cursor-pointer"
+                  onClick={() => {
+                    setOpenModal(true);
+                    setAudioId(audio.id);
+                    setAudioName(audio.name);
+                  }}
                 />
               </div>
             ))

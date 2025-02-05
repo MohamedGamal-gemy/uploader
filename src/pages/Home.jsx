@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import supabase from "../supabase/db";
-// import AnimatedShapes from "../components/AnimatedShapes";
 
 const AuthForm = () => {
-  const [files, setFiles] = useState([]); // تعديل لتخزين عدة ملفات
+  const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -46,7 +45,7 @@ const AuthForm = () => {
   };
 
   const handleFileChange = (e) => {
-    setFiles(Array.from(e.target.files)); // تغيير الملفات إلى مصفوفة
+    setFiles(Array.from(e.target.files));
   };
 
   return (

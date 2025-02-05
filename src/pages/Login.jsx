@@ -5,26 +5,17 @@ import useLogin from "../hooks/useLogin";
 import useAdmin from "../hooks/useAdmin";
 import { useEffect } from "react";
 import AppRoute from "./AppRoute";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { session, handleLogout, loading } = useLogin();
   const { userEmail, fetchEmails } = useAdmin();
-  const navigate = useNavigate();
 
   const us = userEmail.find((e) => e.email.includes(session?.user?.email));
-  console.log(userEmail);
 
   useEffect(() => {
     fetchEmails();
   }, []);
 
-  // useEffect(() => {
-  //   // إذا كان هناك جلسة، قم بتوجيه المستخدم إلى الصفحة الرئيسية
-  //   if (session?.user?.email && !window.location.href.includes("/home")) {
-  //     navigate("/home"); // التوجيه بعد تسجيل الدخول بنجاح
-  //   }
-  // }, [session, navigate]);
   if (us?.email) {
     return (
       <div>

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import useUpload from "../hooks/useUpload";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
+import useLogin from "../hooks/useLogin";
+import CommentModal from "../utils/CommentModal";
+import { MessageCircle } from "lucide-react";
 
 const Images = () => {
+  const { session } = useLogin();
   const { getFiles, images, cdn, deleteFile } = useUpload();
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -11,9 +15,21 @@ const Images = () => {
   useEffect(() => {
     getFiles().finally(() => setLoading(false));
   }, []);
+  const [imgName, setImgName] = useState(null);
+  const [imgId, setImgId] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+  //
 
   return (
     <>
+      {openModal && (
+        <CommentModal
+          file={cdn + imgName}
+          typeFile={"image"}
+          idFile={imgId}
+          openModal={setOpenModal}
+        />
+      )}
       {modal && (
         <div
           className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-30"
@@ -45,27 +61,41 @@ const Images = () => {
           <div className="flex flex-wrap gap-6 justify-center">
             {images.length > 0 ? (
               images.map((image, index) => (
-                <div
-                  key={index}
-                  className="w-[300px] h-[450px] bg-[#d7d2d2]   rounded-lg
+                <>
+                  <div
+                    key={index}
+                    className="w-[300px] h-[480px] bg-[#d7d2d2]   rounded-lg
                    shadow-lg overflow-hidden 
                   transform hover:scale-105 transition-all duration-300"
-                >
-                  <img
-                    onClick={() => {
-                      setShowImage(cdn + image.name);
-                      setModal(true);
-                    }}
-                    src={cdn + image.name}
-                    alt={image.name}
-                    className="w-full h-full object-cover rounded-lg cursor-pointer"
-                  />
-                  <ButtonDelete
-                    deleteFile={deleteFile}
-                    file={image}
-                    className={"top-2 right-2"}
-                  />
-                </div>
+                  >
+                    <img
+                      onClick={() => {
+                        setShowImage(cdn + image.name);
+                        setModal(true);
+                      }}
+                      src={cdn + image.name}
+                      alt={image.name}
+                      className="w-full h-[450px] object-cover rounded-lg cursor-pointer"
+                    />
+                    {session?.user.email === "mohamedelnagg@gmail.com" && (
+                      <ButtonDelete
+                        deleteFile={deleteFile}
+                        file={image}
+                        className={"top-2 right-2"}
+                      />
+                    )}
+                    <div>
+                      <MessageCircle
+                        className="w-5 h-5 cursor-pointer"
+                        onClick={() => {
+                          setOpenModal(true);
+                          setImgId(image.id);
+                          setImgName(image.name);
+                        }}
+                      />
+                    </div>
+                  </div>
+                </>
               ))
             ) : (
               <p className="text-white">لا توجد صور</p>

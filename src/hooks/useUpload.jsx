@@ -40,7 +40,6 @@ const useUpload = () => {
       const audioFiles = [];
 
       data.forEach((file) => {
-        console.log("file", file.metadata.mimetype);
         if (file.metadata.mimetype.startsWith("image/")) {
           imageFiles.push(file);
         } else if (file.metadata.mimetype.startsWith("video/")) {

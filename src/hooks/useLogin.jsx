@@ -3,8 +3,8 @@ import supabase from "../supabase/db";
 
 const useLogin = () => {
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(false); // لإدارة حالة تحميل عملية الدخول
-  const [errorMessage, setErrorMessage] = useState(""); // لإظهار رسائل الخطأ
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -20,7 +20,6 @@ const useLogin = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // دالة لتسجيل الخروج
   const handleLogout = async () => {
     setLoading(true);
     const { error } = await supabase.auth.signOut();
