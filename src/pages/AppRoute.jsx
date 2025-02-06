@@ -20,7 +20,6 @@ const AppRoute = () => {
       <div className=" flex-1 bg-slate-950 ">
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/Videos" element={<Videos />} />
           <Route path="/complaint" element={<ComplaintForm />} />
           <Route path="/sound" element={<Sounds />} />

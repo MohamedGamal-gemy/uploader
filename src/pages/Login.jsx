@@ -3,9 +3,8 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import useLogin from "../hooks/useLogin";
 import useAdmin from "../hooks/useAdmin";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import AppRoute from "./AppRoute";
-import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Login = () => {
   const { session, handleLogout, loading } = useLogin();
@@ -16,7 +15,6 @@ const Login = () => {
   useEffect(() => {
     fetchEmails();
   }, []);
-  // const { adminEmail } = useContext(AdminEmailContext);
 
   if (us?.email) {
     return (
