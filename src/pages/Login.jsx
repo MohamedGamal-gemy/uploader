@@ -42,6 +42,7 @@ const Login = () => {
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           providers={["google"]}
+          onlyThirdPartyProviders={true}
         />
       </div>
     );
