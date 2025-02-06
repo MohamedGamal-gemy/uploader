@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
 import useLogin from "../hooks/useLogin";
 import { MessageCircle } from "lucide-react";
 import CommentModal from "../utils/CommentModal";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Sounds = () => {
   const { session } = useLogin();
@@ -18,6 +19,7 @@ const Sounds = () => {
   useEffect(() => {
     getFiles().finally(() => setLoading(false));
   }, []);
+  const { adminEmail } = useContext(AdminEmailContext);
 
   return (
     <div className="relative p-8 justify-center h-screen bg-[#1d2129]">
@@ -39,11 +41,11 @@ const Sounds = () => {
                     المتصفح الخاص بك لا يدعم الصوت.
                   </audio>
                 </div>
-                {session?.user.email === "mohamedelnagg@gmail.com" && (
+                {session?.user.email === adminEmail && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={audio}
-                    className={"bottom-0.5 px-2 "}
+                    className={"bottom-0.5 right-1 px-2 "}
                   />
                 )}
                 {openModal && (

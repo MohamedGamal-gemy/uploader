@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import { File, MessageCircle } from "lucide-react";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
 import useLogin from "../hooks/useLogin";
 import CommentModal from "../utils/CommentModal";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Pdfs = () => {
   const { session } = useLogin();
@@ -18,6 +19,7 @@ const Pdfs = () => {
   const [openModal, setOpenModal] = useState(false);
   const [imgName, setImgName] = useState(null);
   const [imgId, setImgId] = useState(null);
+  const { adminEmail } = useContext(AdminEmailContext);
 
   return (
     <div className="p-8 bg-[#1d2129] h-screen">
@@ -26,21 +28,12 @@ const Pdfs = () => {
           <div className="text-white">جاري تحميل الملفات...</div>
         ) : pdfs.length > 0 ? (
           <>
-            {/* {openModal && (
-              <CommentModal
-                namefile
-                file={cdn + imgName}
-                typeFile={"pdf"}
-                idFile={imgId}
-                openModal={setOpenModal}
-              />
-            )} */}
             {pdfs.map((pdf, index) => (
               <div
                 key={index}
                 className="w-[250px] relative bg-white rounded-lg shadow-lg overflow-hidden text-center flex flex-col justify-center p-4"
               >
-                {session?.user.email === "mohamedelnagg@gmail.com" && (
+                {session?.user.email === adminEmail && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={pdf}

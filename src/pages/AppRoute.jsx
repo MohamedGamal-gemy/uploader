@@ -10,27 +10,25 @@ import { ToastContainer } from "react-toastify";
 import AdminPage from "./Admin";
 import Modal from "../components/Modal/Modal";
 import useLogin from "../hooks/useLogin";
+import { useContext } from "react";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const AppRoute = () => {
-  const { session } = useLogin();
-
   return (
     <div className="flex">
       <SideLeft />
       <div className=" flex-1 bg-slate-950 ">
         <Routes>
-          {session?.user.email === "mohamedelnagg@gmail.com" && (
-            <Route path="/" element={<Home />} />
-          )}
+          <Route path="/home" element={<Home />} />
+
           <Route path="/Videos" element={<Videos />} />
           <Route path="/complaint" element={<ComplaintForm />} />
           <Route path="/sound" element={<Sounds />} />
           <Route path="/images" element={<Images />} />
           <Route path="/pdfs" element={<Pdfs />} />
 
-          {session?.user.email === "mohamedelnagg@gmail.com" && (
-            <Route path="/admin" element={<AdminPage />} />
-          )}
+          <Route path="/admin" element={<AdminPage />} />
+
           <Route path="/modal" element={<Modal />} />
         </Routes>
       </div>

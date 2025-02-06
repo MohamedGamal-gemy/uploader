@@ -1,11 +1,12 @@
-import useLogin from "./hooks/useLogin";
-import AppRoute from "./pages/AppRoute";
 import Login from "./pages/Login";
+import { AdminEmailProvider } from "./utils/AdminEmailContext ";
 
 function App() {
   return (
     <>
-      <Login />
+      <AdminEmailProvider>
+        <Login />
+      </AdminEmailProvider>
     </>
   );
 }

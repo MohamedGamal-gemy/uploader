@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useUpload from "../hooks/useUpload";
 import { MessageCircle, Play } from "lucide-react";
 import Head from "../components/Head/Head";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import useLogin from "../hooks/useLogin";
 import CommentModal from "../utils/CommentModal";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Videos = () => {
   const { session } = useLogin();
@@ -28,18 +29,11 @@ const Videos = () => {
     setIsPlaying(false);
   };
 
+  const { adminEmail } = useContext(AdminEmailContext);
+  // console.log(adminEmail);
+
   return (
     <div className="p-8 bg-[#1d2129] h-screen">
-      {/* {openModal && (
-        <CommentModal
-          file={cdn + imgName}
-          typeFile={"vedio"}
-          idFile={imgId}
-          openModal={setOpenModal}
-        />
-      )} */}
-      {/* <comm/> */}
-
       {openModal && (
         <CommentModal
           typeFile={"vedio"}
@@ -67,7 +61,7 @@ const Videos = () => {
                   onPlay={handlePlay}
                   onPause={handlePause}
                 />
-                {session?.user.email === "mohamedelnagg@gmail.com" && (
+                {session?.user.email === adminEmail && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={video}

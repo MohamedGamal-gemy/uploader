@@ -3,8 +3,9 @@ import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import useLogin from "../hooks/useLogin";
 import useAdmin from "../hooks/useAdmin";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import AppRoute from "./AppRoute";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Login = () => {
   const { session, handleLogout, loading } = useLogin();
@@ -15,6 +16,9 @@ const Login = () => {
   useEffect(() => {
     fetchEmails();
   }, []);
+  const { adminEmail } = useContext(AdminEmailContext);
+  // console.log(us?.email);
+  // console.log(adminEmail);
 
   if (us?.email) {
     return (
@@ -22,7 +26,7 @@ const Login = () => {
         <div className="bg-[#969da1] text-white flex h-14 justify-evenly items-center px-20">
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
-            {us?.email === "mohamedelnagg@gmail.com" ? " (Admin)" : " (user)"}
+            {us?.email === "ga863410@gmail.com" ? " (Admin)" : " (user)"}
           </h2>
           <button
             onClick={handleLogout}

@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useUpload from "../hooks/useUpload";
 import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import useLogin from "../hooks/useLogin";
 import CommentModal from "../utils/CommentModal";
 import { MessageCircle } from "lucide-react";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
 const Images = () => {
   const { session } = useLogin();
@@ -19,6 +20,7 @@ const Images = () => {
   const [imgId, setImgId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   //
+  const { adminEmail } = useContext(AdminEmailContext);
 
   return (
     <>
@@ -77,7 +79,7 @@ const Images = () => {
                       alt={image.name}
                       className="w-full h-[450px] object-cover rounded-lg cursor-pointer"
                     />
-                    {session?.user.email === "mohamedelnagg@gmail.com" && (
+                    {session?.user.email === adminEmail && (
                       <ButtonDelete
                         deleteFile={deleteFile}
                         file={image}
