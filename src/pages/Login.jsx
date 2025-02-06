@@ -16,9 +16,7 @@ const Login = () => {
   useEffect(() => {
     fetchEmails();
   }, []);
-  const { adminEmail } = useContext(AdminEmailContext);
-  // console.log(us?.email);
-  // console.log(adminEmail);
+  // const { adminEmail } = useContext(AdminEmailContext);
 
   if (us?.email) {
     return (
@@ -26,7 +24,7 @@ const Login = () => {
         <div className="bg-[#969da1] text-white flex h-14 justify-evenly items-center px-20">
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
-            {us?.email === "ga863410@gmail.com" ? " (Admin)" : " (user)"}
+            {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (user)"}
           </h2>
           <button
             onClick={handleLogout}
