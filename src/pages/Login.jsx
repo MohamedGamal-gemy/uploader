@@ -23,7 +23,7 @@ const Login = () => {
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
             {/* samaalatwi23@gmail.com */}
-            {us?.email === "ga863410@gmail.com" ? " (Admin)" : " (user)"}
+            {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (user)"}
           </h2>
           <button
             onClick={handleLogout}
