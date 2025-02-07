@@ -5,7 +5,7 @@ const AdminEmailContext = createContext();
 // samaalatwi23@gmail.com
 // ahmedaliahmedgenedy@gmail.com
 export const AdminEmailProvider = ({ children }) => {
-  const [adminEmail, setAdminEmail] = useState("ga863410@gmail.co");
+  const [adminEmail, setAdminEmail] = useState("ga863410@gmail.com");
 
   return (
     <AdminEmailContext.Provider value={{ adminEmail, setAdminEmail }}>
