@@ -23,7 +23,8 @@ const Login = () => {
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
             {/* samaalatwi23@gmail.com */}
-            {us?.email === "samaalatwi23@gmail.com.com"
+            
+            {us?.email === "samaalatwi23@gmail.com"
               ? " (Admin)"
               : " (user)"}
           </h2>
