@@ -11,7 +11,27 @@ const useUpload = () => {
   const cdn =
     "https://mcmokmrnrabnshsjqpjs.supabase.co/storage/v1/object/public/files/";
 
-  //
+  // دالة لتطهير اسم الملف
+  const sanitizeFileName = (fileName) => {
+    return fileName.replace(/[^a-zA-Z0-9._-]/g, "_"); // استبدال الرموز غير المسموح بها
+  };
+
+  // رفع الملف
+  const uploadFile = async (file) => {
+    const sanitizedFileName = sanitizeFileName(file.name); // تطهير اسم الملف
+    const { error } = await supabase.storage
+      .from("files")
+      .upload(sanitizedFileName, file); // رفع الملف باستخدام الاسم المطهر
+
+    if (error) {
+      toast.error("حدث خطأ أثناء رفع الملف");
+    } else {
+      toast.success("تم رفع الملف بنجاح");
+      getFiles(); // جلب الملفات بعد الرفع
+    }
+  };
+
+  // حذف الملف
   const deleteFile = async (fileName) => {
     try {
       const { error } = await supabase.storage.from("files").remove([fileName]);
@@ -19,7 +39,7 @@ const useUpload = () => {
         toast.error("حدث خطأ أثناء الحذف ");
         return;
       }
-      toast.success("تم الحذف  بنجاح", {
+      toast.success("تم الحذف بنجاح", {
         autoClose: 2000,
         hideProgressBar: true,
         closeButton: true,
@@ -30,7 +50,7 @@ const useUpload = () => {
     }
   };
 
-  //
+  // جلب الملفات
   const getFiles = async () => {
     const { data, error } = await supabase.storage.from("files").list("");
     if (data) {
@@ -39,16 +59,15 @@ const useUpload = () => {
       const pdfFiles = [];
       const audioFiles = [];
 
-      // console.log(file.metadata.mimetype);
       data.forEach((file) => {
         if (file.metadata.mimetype.startsWith("image/")) {
           imageFiles.push(file);
         } else if (file.metadata.mimetype.startsWith("video/")) {
           videoFiles.push(file);
-        } else if (file.metadata.mimetype.startsWith("application/pdf")) {
-          pdfFiles.push(file);
         } else if (file.metadata.mimetype.startsWith("audio/")) {
           audioFiles.push(file);
+        } else if (file.metadata.mimetype === "application/pdf") {
+          pdfFiles.push(file);
         }
       });
 
@@ -62,6 +81,7 @@ const useUpload = () => {
   };
 
   return {
+    uploadFile, // إضافة دالة رفع الملف هنا
     getFiles,
     images,
     videos,

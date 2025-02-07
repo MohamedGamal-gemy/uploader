@@ -2,9 +2,12 @@ import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import supabase from "../supabase/db";
 import { AdminEmailContext } from "../utils/AdminEmailContext ";
+import useUpload from "../hooks/useUpload";
 import useLogin from "../hooks/useLogin";
+// import { useUpload } from "../hooks/useUpload";
 
 const AuthForm = () => {
+  const { uploadFile } = useUpload(); // استخدام الدالة من useUpload
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,29 +19,21 @@ const AuthForm = () => {
       toast.error("من فضلك اختر ملفات");
       return;
     }
-    console.log(files);
 
     setUploading(true);
 
     const uploadPromises = files.map((file) => {
       const fileName = `${Date.now()}-${file.name}`;
-      return supabase.storage.from("files").upload(fileName, file);
+      return uploadFile(file); // استخدام دالة uploadFile من useUpload
     });
 
     try {
-      const results = await Promise.all(uploadPromises);
-
-      const error = results.find((result) => result.error);
-      if (error) {
-        setError(error.message);
-        toast.error("حدث خطأ أثناء رفع الملفات");
-      } else {
-        toast.success("تم رفع الملفات بنجاح", {
-          autoClose: 2000,
-          closeButton: true,
-          hideProgressBar: true,
-        });
-      }
+      await Promise.all(uploadPromises);
+      // toast.success("تم رفع الملفات بنجاح", {
+      //   autoClose: 2000,
+      //   closeButton: true,
+      //   hideProgressBar: true,
+      // });
     } catch (err) {
       setError(err.message);
       toast.error("حدث خطأ غير متوقع");
@@ -50,13 +45,14 @@ const AuthForm = () => {
   const handleFileChange = (e) => {
     setFiles(Array.from(e.target.files));
   };
+
   const { session } = useLogin();
   const { adminEmail } = useContext(AdminEmailContext);
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen bg-[#171825bc]">
-      <div className="absolute right-4 top-4 w-[180px] h-[380px] bg-[#1db2dd]  opacity-55 blur-[150px] "></div>
-      <div className="absolute left-4 bottom-4 w-[180px] h-[380px] bg-[#1db2dd]  blur-[150px] opacity-55"></div>
+      <div className="absolute right-4 top-4 w-[180px] h-[380px] bg-[#1db2dd] opacity-55 blur-[150px]" />
+      <div className="absolute left-4 bottom-4 w-[180px] h-[380px] bg-[#1db2dd] blur-[150px] opacity-55" />
       {session?.user?.email === adminEmail && (
         <form
           onSubmit={handleSubmit}
