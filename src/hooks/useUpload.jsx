@@ -66,7 +66,8 @@ const useUpload = () => {
           videoFiles.push(file);
         } else if (file.metadata.mimetype.startsWith("audio/")) {
           audioFiles.push(file);
-        } else if (file.metadata.mimetype === "application/pdf") {
+          application / vnd;
+        } else if (file.metadata.mimetype.startsWith("application")) {
           pdfFiles.push(file);
         }
       });
