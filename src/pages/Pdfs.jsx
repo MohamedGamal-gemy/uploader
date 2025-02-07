@@ -100,9 +100,9 @@ import ButtonDelete from "../components/Head/Button/ButtonDelete";
 import Head from "../components/Head/Head";
 import useLogin from "../hooks/useLogin";
 import CommentModal from "../utils/CommentModal";
-import { AdminEmailContext } from "../utils/AdminEmailContext";
+import { AdminEmailContext } from "../utils/AdminEmailContext ";
 
-const Files = () => {
+const Pdfs = () => {
   const { session } = useLogin();
   const { getFiles, files, cdn, deleteFile } = useUpload();
   const [loading, setLoading] = useState(true);
@@ -200,4 +200,5 @@ const Files = () => {
   );
 };
 
-export default Files;
+export default Pdfs;
+
