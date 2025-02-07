@@ -16,6 +16,7 @@ const AuthForm = () => {
       toast.error("من فضلك اختر ملفات");
       return;
     }
+    console.log(files);
 
     setUploading(true);
 

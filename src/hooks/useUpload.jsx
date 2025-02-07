@@ -39,6 +39,7 @@ const useUpload = () => {
       const pdfFiles = [];
       const audioFiles = [];
 
+      // console.log(file.metadata.mimetype);
       data.forEach((file) => {
         if (file.metadata.mimetype.startsWith("image/")) {
           imageFiles.push(file);
