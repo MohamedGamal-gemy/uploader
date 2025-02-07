@@ -58,7 +58,7 @@ const Pdfs = () => {
                 </a>
                 <div className="mt-4">
                   <button
-                    onClick={() => handleOpenFile(cdn + wordFile.name)}
+                    onClick={() => handleOpenFile(cdn + pdf.name)}
                     className="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg mt-2 hover:bg-blue-700"
                   >
                     فتح
