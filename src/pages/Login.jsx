@@ -22,7 +22,10 @@ const Login = () => {
         <div className="bg-[#969da1] text-white flex h-14 justify-evenly items-center px-20">
           <h2 className="text-blue-900 text-xl">
             Welcome, {us?.email}
-            {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (user)"}
+            {/* samaalatwi23@gmail.com */}
+            {us?.email === "ahmedaliahmedgenedy@gmail.com"
+              ? " (Admin)"
+              : " (user)"}
           </h2>
           <button
             onClick={handleLogout}
