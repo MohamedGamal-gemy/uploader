@@ -137,7 +137,7 @@ const Pdfs = () => {
       <div className="flex flex-wrap gap-6 justify-center">
         {loading ? (
           <div className="text-white">جاري تحميل الملفات...</div>
-        ) : files.length > 0 ? (
+        ) : files?.length > 0 ? (
           <>
             {files.map((file, index) => (
               <div
