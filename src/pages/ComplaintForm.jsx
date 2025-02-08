@@ -21,10 +21,14 @@ const ComplaintForm = () => {
       };
 
       const response = await emailjs.send(
-        "service_2wze4r6", // معرف الخدمة
-        "template_30143j8", // معرف القالب
+        // "service_2wze4r6", // معرف الخدمة
+        "service_99i3zwb", // معرف الخدمة
+        // "template_30143j8", // معرف القالب
+        // "template_30143j8", // معرف القالب
+        "template_ock2rqi", // معرف القالب
         emailParams, // المتغيرات التي سيتم إرسالها
-        "JuUzNyqdu7eQn3hpN" // معرف المستخدم (الخاص بك)
+        // "JuUzNyqdu7eQn3hpN" // معرف المستخدم (الخاص بك)
+        "D1dou86PRuZtZL9Ur" // معرف المستخدم (الخاص بك)
       );
 
       toast.success("تم تقديم الشكوى بنجاح", {
