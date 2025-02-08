@@ -19,15 +19,39 @@ const useUpload = () => {
   // رفع الملف
   const uploadFile = async (file) => {
     const sanitizedFileName = sanitizeFileName(file.name); // تطهير اسم الملف
-    const { error } = await supabase.storage
-      .from("files")
-      .upload(sanitizedFileName, file); // رفع الملف باستخدام الاسم المطهر
 
-    if (error) {
+    // جلب قائمة الملفات الحالية للتحقق مما إذا كان الملف مرفوعًا مسبقًا
+    const { data: existingFiles, error: fetchError } = await supabase.storage
+      .from("files")
+      .list("");
+
+    if (fetchError) {
+      toast.error("حدث خطأ أثناء التحقق من الملفات الموجودة");
+      return;
+    }
+
+    // التحقق مما إذا كان الملف مرفوعًا مسبقًا
+    const fileExists = existingFiles.some((f) => f.name === sanitizedFileName);
+
+    if (fileExists) {
+      toast.info("هذا الملف مضاف بالفعل!", {
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeButton: true,
+      });
+      return;
+    }
+
+    // رفع الملف إذا لم يكن مرفوعًا مسبقًا
+    const { error: uploadError } = await supabase.storage
+      .from("files")
+      .upload(sanitizedFileName, file);
+
+    if (uploadError) {
       toast.error("حدث خطأ أثناء رفع الملف");
     } else {
       toast.success("تم رفع الملف بنجاح");
-      getFiles(); // جلب الملفات بعد الرفع
+      getFiles(); // تحديث القائمة بعد الرفع
     }
   };
 
