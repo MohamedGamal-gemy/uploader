@@ -19,16 +19,24 @@ const Login = () => {
   if (us?.email) {
     return (
       <div>
-        <div className="bg-[#969da1] text-white flex h-14 justify-evenly items-center px-20">
-          <h2 className="text-blue-900 text-xl">
-            Welcome, {us?.email}
-            {/* samaalatwi23@gmail.com */}
-            {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (user)"}
-          </h2>
+        <div className="bg-[#969da1] text-white flex  justify-evenly items-center p-4 md:px-20">
+          <div className="text-blue-900 text-xl flex flex-col md:flex-row">
+            <h4 className="text-blue-900">Welcome,</h4>{" "}
+            <p className="text-gray-900">
+              {us?.email}
+
+              {/* samaalatwi23@gmail.com */}
+              <span className="text-blue-900">
+                {us?.email === "samaalatwi23@gmail.com"
+                  ? " (Admin)"
+                  : " (user)"}
+              </span>
+            </p>
+          </div>
           <button
             onClick={handleLogout}
             disabled={loading}
-            className="cursor-pointer bg-amber-400 p-2 rounded-full hover:bg-amber-500 transition"
+            className="cursor-pointer bg-blue-400 p-2 rounded-full hover:bg-blue-500 transition"
           >
             {loading ? "Logging out..." : "Log out"}
           </button>
