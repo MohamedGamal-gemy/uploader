@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import AppRoute from "./AppRoute";
 
 const Login = () => {
-  const { session, handleLogout, loading } = useLogin();
+  const { session, handleLogout, loading, errorMessage } = useLogin();
   const { userEmail, fetchEmails } = useAdmin();
 
   const us = userEmail.find((e) => e.email.includes(session?.user?.email));
@@ -19,17 +19,13 @@ const Login = () => {
   if (us?.email) {
     return (
       <div>
-        <div className="bg-[#969da1]  text-white flex  justify-evenly items-center p-4 md:px-20">
-          <div className="text-blue-900  text-xl flex flex-col md:flex-row">
-            <h4 className="text-blue-900">Welcome,</h4>{" "}
+        <div className="bg-[#969da1] text-white flex justify-evenly items-center p-4 md:px-20">
+          <div className="text-blue-900 text-xl flex flex-col md:flex-row">
+            <h4 className="text-blue-900">Welcome,</h4>
             <p className="text-gray-900">
               {us?.email}
-
-              {/* samaalatwi23@gmail.com */}
               <span className="text-blue-900">
-                {us?.email === "samaalatwi23@gmail.com"
-                  ? " (Admin)"
-                  : " (user)"}
+                {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (User)"}
               </span>
             </p>
           </div>
@@ -41,6 +37,14 @@ const Login = () => {
             {loading ? "Logging out..." : "Log out"}
           </button>
         </div>
+
+        {/* عرض رسالة الخطأ إن وجدت */}
+        {errorMessage && (
+          <div className="text-red-500 text-center mt-2">
+            {errorMessage}
+          </div>
+        )}
+
         <AppRoute />
       </div>
     );
