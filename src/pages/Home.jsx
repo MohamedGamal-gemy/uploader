@@ -51,7 +51,7 @@ const AuthForm = () => {
       {session?.user?.email === adminEmail && (
         <form
           onSubmit={handleSubmit}
-          className="mx-auto bg-white p-6 rounded-lg shadow-md w-[260px] sm:w-[350px]"
+          className="mx-auto relative z-40 bg-white p-6 rounded-lg shadow-md w-[260px] sm:w-[350px]"
         >
           <div className="mb-5">
             <label
