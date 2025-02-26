@@ -56,22 +56,22 @@ const SideLeft = () => {
   ];
 
   return (
-    <div className="h-screen w-20   sm:w-64 bg-secondary   text-white p-4 sticky top-0  z-20 overflow-hidden">
+    <div className="h-screen w-24   sm:w-64 bg-secondary   text-white p-4 sticky top-0  z-20 overflow-hidden">
       <div className="absolute bg-[#1db2dd] opacity-50 left-2 top-4 w-[100px]  blur-[150px] h-[500px]"></div>
       <div className="relative">
-        <div className=" sm:w-40 sm:h-40  mx-auto w-16  h-16 mb-6">
+        <div className=" sm:w-40 sm:h-40  mx-auto w-8   h-8 mb-6">
           <img
             className=" w-full h-full "
             src="./63e668ce-9fa5-457f-9736-aaa152fe5932.jfif"
             alt=""
           />
         </div>
-        <ul className="flex flex-col gap-5 ">
+        <ul className="flex flex-col justify-center sm:items-stretch items-center gap-5 ">
           {category.map((e) => (
             <li key={e.id}>
               <NavLink
                 to={e.path}
-                className={"text-third block p-2 rounded transition"}
+                className={"text-third block p-1  md:p-2 rounded transition"}
               >
                 <div className="felx justify-between">
                   <div className="flex  items-center gap-3">

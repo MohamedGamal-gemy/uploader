@@ -19,8 +19,8 @@ const Login = () => {
   if (us?.email) {
     return (
       <div>
-        <div className="bg-[#969da1] text-white flex  justify-evenly items-center p-4 md:px-20">
-          <div className="text-blue-900 text-xl flex flex-col md:flex-row">
+        <div className="bg-[#969da1]  text-white flex  justify-evenly items-center p-4 md:px-20">
+          <div className="text-blue-900  text-xl flex flex-col md:flex-row">
             <h4 className="text-blue-900">Welcome,</h4>{" "}
             <p className="text-gray-900">
               {us?.email}

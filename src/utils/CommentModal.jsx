@@ -44,7 +44,7 @@ const CommentModal = memo(({ namefile, file, typeFile, idFile, openModal }) => {
   };
 
   return (
-    <div className="fixed w-[90%] md:w-[700px] h-[90%] md:h-[700px] rounded-2xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-40 bg-white p-6 shadow-lg overflow-y-auto">
+    <div className="fixed w-[90%] md:w-[700px] h-[90%]  rounded-2xl left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-40 bg-white p-6 shadow-lg overflow-y-auto">
       <span
         className="absolute right-6 top-6 cursor-pointer text-2xl text-red-400 hover:text-red-600 transition-colors"
         onClick={() => openModal(false)}

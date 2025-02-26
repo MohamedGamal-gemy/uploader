@@ -29,11 +29,6 @@ const AuthForm = () => {
 
     try {
       await Promise.all(uploadPromises);
-      // toast.success("تم رفع الملفات بنجاح", {
-      //   autoClose: 2000,
-      //   closeButton: true,
-      //   hideProgressBar: true,
-      // });
     } catch (err) {
       setError(err.message);
       toast.error("حدث خطأ غير متوقع");
