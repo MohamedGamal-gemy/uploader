@@ -1,20 +1,12 @@
-import supabase from "../supabase/db";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import useLogin from "../hooks/useLogin";
-import useAdmin from "../hooks/useAdmin";
-import { useEffect } from "react";
-import AppRoute from "./AppRoute";
-
 const Login = () => {
   const { session, handleLogout, loading, errorMessage } = useLogin();
   const { userEmail, fetchEmails } = useAdmin();
 
-  const us = userEmail.find((e) => e.email.includes(session?.user?.email));
-
   useEffect(() => {
     fetchEmails();
   }, []);
+
+  const us = userEmail.find((e) => e.email.includes(session?.user?.email));
 
   if (us?.email) {
     return (
@@ -25,7 +17,9 @@ const Login = () => {
             <p className="text-gray-900">
               {us?.email}
               <span className="text-blue-900">
-                {us?.email === "samaalatwi23@gmail.com" ? " (Admin)" : " (User)"}
+                {us?.email === "samaalatwi23@gmail.com"
+                  ? " (Admin)"
+                  : " (User)"}
               </span>
             </p>
           </div>
@@ -40,9 +34,7 @@ const Login = () => {
 
         {/* عرض رسالة الخطأ إن وجدت */}
         {errorMessage && (
-          <div className="text-red-500 text-center mt-2">
-            {errorMessage}
-          </div>
+          <div className="text-red-500 text-center mt-2">{errorMessage}</div>
         )}
 
         <AppRoute />
