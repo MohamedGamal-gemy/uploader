@@ -7,18 +7,26 @@ const useLogin = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    // جلب الجلسة الحالية عند التحميل
     const fetchSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      if (error) {
+        console.error("Error fetching user:", error.message);
+        setSession(null);
+      } else {
+        setSession(user ? { user } : null);
+      }
     };
 
     fetchSession();
 
-    // الاشتراك في التغيرات على الجلسة
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
 
     return () => authListener.subscription.unsubscribe();
   }, []);
@@ -26,9 +34,10 @@ const useLogin = () => {
   const handleLogout = async () => {
     setLoading(true);
 
-    // التحقق من الجلسة قبل تسجيل الخروج
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
       setErrorMessage("No active session found.");
       setLoading(false);
       return;
@@ -38,7 +47,7 @@ const useLogin = () => {
     if (error) {
       setErrorMessage("Error signing out: " + error.message);
     } else {
-      setSession(null); // إعادة تعيين الجلسة يدويًا
+      setSession(null);
     }
 
     setLoading(false);
