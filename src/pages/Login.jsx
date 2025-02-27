@@ -25,7 +25,9 @@ const Login = () => {
             <p className="text-gray-900">
               {us?.email}
               <span className="text-blue-900">
-                {us?.email === "samaalatwi23@gmail.com"
+                {us?.email === "samaalatwi23@gmail.com" ||
+                "Owead4@gmail.com" ||
+                "ga863410@gmail.com"
                   ? " (Admin)"
                   : " (User)"}
               </span>
