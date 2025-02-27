@@ -9,6 +9,11 @@ import AppRoute from "./AppRoute";
 const Login = () => {
   const { session, handleLogout, loading, errorMessage } = useLogin();
   const { userEmail, fetchEmails } = useAdmin();
+  const adminEmails = [
+    "samaalatwi23@gmail.com",
+    "Owead4@gmail.com",
+    "ga863410@gmail.com",
+  ];
 
   useEffect(() => {
     fetchEmails();
@@ -25,12 +30,8 @@ const Login = () => {
             <p className="text-gray-900">
               {us?.email}
               <span className="text-blue-900">
-                {us?.email === "samaalatwi23@gmail.com" ||
-                "Owead4@gmail.com" ||
-                "ga863410@gmail.com"
-                  ? " (Admin)"
-                  : " (User)"}
-              </span>
+                {adminEmails.includes(us?.email) ? " (Admin)" : " (User)"}
+              </span>{" "}
             </p>
           </div>
           <button
