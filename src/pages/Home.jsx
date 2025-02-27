@@ -48,7 +48,7 @@ const AuthForm = () => {
     <div className="relative flex flex-col items-center justify-center h-screen bg-[#171825bc]">
       <div className="absolute right-4 top-4 w-[180px] h-[380px] bg-[#1db2dd] opacity-55 blur-[150px]" />
       <div className="absolute left-4 bottom-4 w-[180px] h-[380px] bg-[#1db2dd] blur-[150px] opacity-55" />
-      {session?.user?.email === adminEmail && (
+      {adminEmail.includes(session?.user?.email) && (
         <form
           onSubmit={handleSubmit}
           className="mx-auto relative z-40 bg-white p-6 rounded-lg shadow-md w-[260px] sm:w-[350px]"
