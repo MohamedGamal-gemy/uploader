@@ -61,7 +61,7 @@ const Videos = () => {
                   onPlay={handlePlay}
                   onPause={handlePause}
                 />
-                {session?.user.email === adminEmail && (
+                {adminEmail.includes(session?.user?.email) && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={video}

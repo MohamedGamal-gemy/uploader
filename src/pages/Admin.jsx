@@ -25,7 +25,7 @@ const Admin = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-lg sm:rounded-lg p-6 ">
-      {session?.user.email === adminEmail && (
+      {adminEmail.includes(session?.user?.email) && (
         <>
           <button
             onClick={() => navigate("/modal")}

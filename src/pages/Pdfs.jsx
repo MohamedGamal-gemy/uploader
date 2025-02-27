@@ -50,7 +50,7 @@ const Pdfs = () => {
                 key={index}
                 className="w-[250px] relative bg-white rounded-lg shadow-lg overflow-hidden text-center flex flex-col justify-center p-4"
               >
-                {session?.user.email === adminEmail && (
+                {adminEmail.includes(session?.user?.email) && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={pdf}

@@ -79,7 +79,7 @@ const Images = () => {
                       alt={image.name}
                       className="w-full h-[450px] object-cover rounded-lg cursor-pointer"
                     />
-                    {session?.user.email === adminEmail && (
+                    {adminEmail.includes(session?.user?.email) && (
                       <ButtonDelete
                         deleteFile={deleteFile}
                         file={image}

@@ -41,7 +41,7 @@ const Sounds = () => {
                     المتصفح الخاص بك لا يدعم الصوت.
                   </audio>
                 </div>
-                {session?.user.email === adminEmail && (
+                {adminEmail.includes(session?.user?.email) && (
                   <ButtonDelete
                     deleteFile={deleteFile}
                     file={audio}
